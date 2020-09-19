@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { Text } from '../components/Text';
 
 const Index = () => {
   return (
@@ -7,10 +8,12 @@ const Index = () => {
       <Head>
         <title>Daniel Steigerwald</title>
       </Head>
-      <h1>Daniel Steigerwald</h1>
-      <Link href="/facebook">
-        <a>Vybranné Facebook statusy</a>
-      </Link>
+      <Text variant="h1">Daniel Steigerwald</Text>
+      <Text>
+        <Link href="/facebook">
+          <a>Vybranné Facebook statusy</a>
+        </Link>
+      </Text>
     </div>
   );
 };

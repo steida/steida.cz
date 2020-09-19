@@ -8,3 +8,11 @@ body {
   max-width: 680px;
   margin: 0 auto;
 }
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
