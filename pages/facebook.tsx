@@ -373,6 +373,14 @@ export async function getStaticProps() {
     '10158784126003656_10156375538853656',
     '10158784126003656_10156326117303656',
     '10158784126003656_10156311993478656',
+    '10158784126003656_10157670499343656',
+    '10158784126003656_10157787420538656',
+    '10158784126003656_10156568138573656',
+    '10158784126003656_10157150179543656',
+    '10158784126003656_10157189969848656',
+    '10158784126003656_10157002610053656',
+    '10158784126003656_10158241918958656',
+    '10158784126003656_10157910729013656',
   ];
 
   const minimalStatuses: {
@@ -415,11 +423,13 @@ const Facebook = ({
   return (
     <div>
       <Head>
-        <title>Daniel Steigerwald - Vybranné Facebook statusy</title>
+        <title>Daniel Steigerwald - Facebook</title>
       </Head>
-      <Text variant="h1">Daniel Steigerwald</Text>
-      <Text variant="h2">Vybranné Facebook statusy</Text>
-      <Text>Roky 2017 až 2020. Seřazeno dle počtu reakcí. Promazáno.</Text>
+      <Text variant="h1">Daniel Steigerwald - Facebook</Text>
+      {/* <Text variant="h2">Vybranné Facebook statusy</Text> */}
+      <Text variant="h2">
+        Roky 2017 až 2020. Seřazeno dle počtu reakcí. Promazáno.
+      </Text>
       {statuses.map(s => {
         return (
           <Status

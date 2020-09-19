@@ -11,7 +11,7 @@ const Index = () => {
       <Text variant="h1">Daniel Steigerwald</Text>
       <Text>
         <Link href="/facebook">
-          <a>Vybranné Facebook statusy</a>
+          <a>Facebook</a>
         </Link>
       </Text>
     </div>

@@ -13,13 +13,17 @@ export const Status = ({
   createdTime: string;
   message: string;
 }) => {
-  const handleClick = () => {
-    foo.push(id);
-    console.log(foo);
-  };
+  // const handleClick = () => {
+  //   foo.push(id);
+  //   console.log(foo);
+  // };
 
   return (
-    <div key={id} className={styles.status} onClick={handleClick}>
+    <div
+      key={id}
+      className={styles.status}
+      // onClick={handleClick}
+    >
       <a
         target="_blank"
         href={`https://www.facebook.com/daniel.steigerwald/posts/${
