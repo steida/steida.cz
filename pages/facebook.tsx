@@ -1,6 +1,7 @@
 import { InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 import { Status } from '../components/Status';
+import { Text } from '../components/Text';
 import statuses from '../data/statuses.json';
 
 export async function getStaticProps() {
@@ -45,14 +46,9 @@ const Facebook = ({
       <Head>
         <title>Daniel Steigerwald - Vybranné Facebook statusy</title>
       </Head>
-      <h1>Daniel Steigerwald</h1>
-      <h2>Vybranné Facebook statusy</h2>
-      <p>
-        <span title="Dál mne Facebook API nepustí. Mají tam nějaký bug.">
-          Roky 2017 až 2020.
-        </span>{' '}
-        Seřazeno dle počtu reakcí. Promazáno.
-      </p>
+      <Text variant="h1">Daniel Steigerwald</Text>
+      <Text variant="h2">Vybranné Facebook statusy</Text>
+      <Text>Roky 2017 až 2020. Seřazeno dle počtu reakcí. Promazáno.</Text>
       {statuses.map(s => {
         return (
           <Status

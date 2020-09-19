@@ -1,7 +1,20 @@
 .status {
-  margin-bottom: 32px;
+  margin-bottom: 48px;
 }
 
 .message {
   white-space: pre-wrap;
+  color: #444;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.timeLink {
+  display: block;
+  font-size: 12px;
+  line-height: 24px;
+  font-weight: bold;
+  /* margin-bottom: 2px; */
+  color: #aaa;
+  text-decoration: none;
 }
