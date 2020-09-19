@@ -426,10 +426,10 @@ const Facebook = ({
         <title>Daniel Steigerwald - Facebook</title>
       </Head>
       <Text variant="h1">Daniel Steigerwald - Facebook</Text>
-      {/* <Text variant="h2">Vybranné Facebook statusy</Text> */}
       <Text variant="h2">
         Roky 2017 až 2020. Seřazeno dle počtu reakcí. Promazáno.
       </Text>
+      <hr style={{ marginTop: '24px', marginBottom: '24px' }} />
       {statuses.map(s => {
         return (
           <Status
