@@ -1,4 +1,4 @@
-export interface Status {
+export interface FacebookStatus {
   created_time: string;
   id: string;
   type: string;

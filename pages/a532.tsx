@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import { Status } from '../types';
+import { FacebookStatus } from '../types';
 
 interface Response {
-  data: Status[];
+  data: FacebookStatus[];
   paging: {
     next: string;
   };
@@ -47,7 +47,7 @@ const FetchFromFacebook = () => {
     })(document, 'script', 'facebook-jssdk');
   }, []);
 
-  const [data, setData] = useState<Status[]>([]);
+  const [data, setData] = useState<FacebookStatus[]>([]);
   const dataRef = useRef(data);
   useEffect(() => {
     dataRef.current = data;
@@ -56,39 +56,40 @@ const FetchFromFacebook = () => {
   const handleResponse = (response: Response) => {
     if (response && !response.error) {
       setData(data => data.concat(response.data));
-      // if (dataRef.current.length > 50) return;
-      // setTimeout(() => {
       callApi(response.paging.next);
-      // }, 100);
     } else {
       console.log(response.error);
     }
   };
 
+  const [curUrl, setCurUrl] = useState('');
+
   const callApi = (url: string) => {
+    setCurUrl(url);
     FB.api(url, handleResponse);
   };
 
   const login = () => {
-    FB.login(function(response) {
-      if (response.authResponse) {
-        console.log('Welcome!  Fetching your information.... ');
-        FB.api('/me', function(response) {
-          // @ts-expect-error
-          const id = response.id as string;
-          // console.log(response);
-          // 10158784126003656/posts?fields=id,link,created_time,message,reactions.summary(total_count)
-          // data.paging.next
-
-          // since
-          callApi(
-            `/${id}/posts?fields=id,type,link,created_time,message,reactions.summary(total_count)&limit=200`,
-          );
-        });
-      } else {
-        console.log('User cancelled login or did not fully authorize.');
-      }
-    });
+    FB.login(
+      function(response) {
+        if (response.authResponse) {
+          console.log('Welcome!  Fetching your information.... ');
+          FB.api('/me', function(response) {
+            // @ts-expect-error
+            const id = response.id as string;
+            // Broken FB API returns only 2398 posts. Then it fails with unknown error.
+            // I have tried offset, timeout, etc., nothing helps.
+            // {message: "An unknown error has occurred.", type: "OAuthException", code: 1, fbtrace_id: "AiWhK7QtphcEvidDEoDQ7Ot"}
+            callApi(
+              `/${id}/posts?fields=id,type,link,created_time,message,reactions.summary(total_count)&limit=200`,
+            );
+          });
+        } else {
+          console.log('User cancelled login or did not fully authorize.');
+        }
+      },
+      { scope: 'user_posts' },
+    );
   };
 
   const [shown, setShown] = useState(false);
@@ -101,7 +102,10 @@ const FetchFromFacebook = () => {
     <div>
       Welcome to Next.js!
       <button onClick={login}>login</button>
+      <br />
       {data.length}
+      <br />
+      {curUrl}
       {shown && (
         <textarea
           value={JSON.stringify(data)}
