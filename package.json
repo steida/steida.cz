@@ -1,0 +1,38 @@
+{
+  "name": "steida.cz",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "statuses": "bun run scripts/statuses.ts"
+  },
+  "dependencies": {
+    "classnames": "^2.3.1",
+    "fathom-client": "^3.5.0",
+    "fp-ts": "^2.12.2",
+    "next": "^12.2.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-intl": "^6.0.0",
+    "slug": "^6.0.0",
+    "zustand": "^4.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.6.4",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
+    "@types/slug": "^5.0.3",
+    "@typescript-eslint/eslint-plugin": "^5.34.0",
+    "@typescript-eslint/parser": "^5.34.0",
+    "bun-types": "^0.1.8",
+    "eslint": "^8.21.0",
+    "eslint-config-next": "^12.2.5",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-functional": "^4.2.2",
+    "eslint-plugin-import": "^2.26.0",
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4"
+  }
+}

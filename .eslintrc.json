@@ -1,0 +1,26 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": ["./tsconfig.json"]
+  },
+  "plugins": ["@typescript-eslint", "react-hooks", "functional"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "plugin:functional/lite",
+    "plugin:functional/stylistic",
+    "plugin:import/recommended",
+    "plugin:import/typescript",
+    "next/core-web-vitals"
+  ],
+  "rules": {
+    "react-hooks/exhaustive-deps": "error",
+    // https://github.com/vercel/next.js/discussions/24254#discussioncomment-1136940
+    "@next/next/no-html-link-for-pages": "off",
+    "functional/no-return-void": "off",
+    "no-console": "error",
+    "import/no-cycle": "error"
+  }
+}

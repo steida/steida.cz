@@ -1,0 +1,29 @@
+.status {
+  margin-bottom: 48px;
+}
+
+.header {
+  display: flex;
+}
+
+.headerLink {
+  font-size: 12px;
+  font-weight: bold;
+  color: #aaa;
+}
+
+.content {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+.selected {
+  box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px,
+    rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px,
+    rgba(240, 46, 170, 0.05) 25px 25px;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row-reverse;
+}

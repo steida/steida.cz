@@ -1,0 +1,9 @@
+.header {
+  text-align: right;
+  margin-bottom: 24px;
+}
+
+.pending {
+  transition: opacity 0.5s 0.5s;
+  opacity: 0.5;
+}
