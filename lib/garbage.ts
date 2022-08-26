@@ -1,5 +1,3 @@
-// TODO: Smazat ze zdrojovych dat, maznout repo a udelat ho znova,
-// ten projekt chci public, tak
 export const garbage = new Set(
   [
     "kag0d9",
