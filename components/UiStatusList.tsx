@@ -80,7 +80,9 @@ export const UiStatusList: FC<{
         deferredSortBy === "timestamp"
           ? filteredStatuses
           : pipe(filteredStatuses, readonlyArray.sort(ordUiStatusTextLength)),
-        readonlyArray.map((s) => <UiStatusItem status={s} key={s.timestamp} />)
+        readonlyArray.map((s) => (
+          <UiStatusItem status={s} key={s.timestamp} onlyPreview />
+        ))
       ),
     [deferredSortBy, filteredStatuses]
   );

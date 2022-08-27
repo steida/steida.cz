@@ -1,4 +1,4 @@
-import { readonlyArray, string } from "fp-ts";
+import { readonlyArray, readonlyRecord, string } from "fp-ts";
 import { pipe } from "fp-ts/function";
 import create from "zustand";
 import { AppState } from "../types";
@@ -26,4 +26,12 @@ export const useAppState = create<AppState>((set) => ({
       ),
     })),
   unselectAll: () => set(() => ({ selected: readonlyArray.empty })),
+  expandedPreviews: readonlyRecord.empty,
+  expandPreview: (timestamp) =>
+    set(({ expandedPreviews }) => ({
+      expandedPreviews: pipe(
+        expandedPreviews,
+        readonlyRecord.upsertAt(timestamp, true)
+      ),
+    })),
 }));

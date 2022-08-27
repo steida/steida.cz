@@ -3,18 +3,18 @@ import { identity, pipe } from "fp-ts/function";
 import { Endomorphism } from "fp-ts/Endomorphism";
 import { Reader } from "fp-ts/Reader";
 
-interface PerexConfig {
+interface PreviewConfig {
   readonly maxLength: number;
   readonly modifier?: Endomorphism<string>;
 }
 
-interface Perex {
+interface Preview {
   readonly text: string;
   readonly isTrimmed: boolean;
 }
 
-export const createPerex =
-  (text: string): Reader<PerexConfig, Perex> =>
+export const createPreview =
+  (text: string): Reader<PreviewConfig, Preview> =>
   ({ maxLength, modifier = identity }) =>
     pipe(
       text.trim().split(/(\s+)/),
@@ -31,17 +31,17 @@ export const createPerex =
           )
       ),
       either.map(
-        (a): Perex => ({
+        (a): Preview => ({
           text: modifier(a.join(string.empty)),
           isTrimmed: false,
         })
       ),
       either.getOrElseW(
-        (a): Perex => ({
+        (a): Preview => ({
           text: pipe(
             a.join(string.empty),
             string.trim,
-            (s) => s + "…",
+            (s) => (!s.endsWith(".") ? s + "…" : s),
             modifier
           ),
           isTrimmed: true,

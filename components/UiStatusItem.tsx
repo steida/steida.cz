@@ -3,12 +3,18 @@ import Link from "next/link";
 import { FC } from "react";
 import { useAppState } from "../lib/useAppState";
 import type { UiStatus } from "../types";
+import { Preview } from "./Preview";
 import styles from "./UiStatusItem.module.css";
 
 export const UiStatusItem: FC<{
   readonly status: UiStatus;
   readonly noCheckbox?: boolean;
-}> = ({ status: { timestamp, text, formattedDate }, noCheckbox }) => {
+  readonly onlyPreview?: boolean;
+}> = ({
+  status: { timestamp, text, formattedDate },
+  noCheckbox,
+  onlyPreview,
+}) => {
   const isSelected = useAppState((s) => s.selected.includes(timestamp));
   const select = useAppState((s) => s.select);
   const unselect = useAppState((s) => s.unselect);
@@ -37,7 +43,7 @@ export const UiStatusItem: FC<{
           isSelected ? styles.selected : string.empty
         }`}
       >
-        {text}
+        {onlyPreview ? <Preview text={text} timestamp={timestamp} /> : text}
       </div>
       {noCheckbox !== true && (
         <label className={styles.footer}>

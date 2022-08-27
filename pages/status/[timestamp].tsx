@@ -6,7 +6,7 @@ import { useIntl } from "react-intl";
 import { UiStatusItem } from "../../components/UiStatusItem";
 import statuses from "../../data/statuses.json";
 import { createFormattedDate } from "../../lib/createFormattedDate";
-import { createPerex } from "../../lib/createPerex";
+import { createPreview } from "../../lib/createPreview";
 import { createTitle } from "../../lib/createTitle";
 import { Status } from "../../types";
 
@@ -36,7 +36,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = ({ params }) => ({
 
 const StatusDetail: NextPage<Props> = ({ status }) => {
   const intl = useIntl();
-  const title = createPerex(status.text)({
+  const title = createPreview(status.text)({
     maxLength: 70,
     modifier: createTitle,
   }).text;

@@ -1,3 +1,5 @@
+import { ReadonlyRecord } from "fp-ts/ReadonlyRecord";
+
 export interface FacebookStatus {
   readonly timestamp: number;
   readonly data?: ReadonlyArray<{ readonly post?: string }>;
@@ -32,4 +34,6 @@ export interface AppState {
   readonly select: (timestamp: string) => void;
   readonly unselect: (timestamp: string) => void;
   readonly unselectAll: () => void;
+  readonly expandedPreviews: ReadonlyRecord<string, boolean>;
+  readonly expandPreview: (timestamp: string) => void;
 }
