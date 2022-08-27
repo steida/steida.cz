@@ -12,17 +12,25 @@ export const Preview: FC<{
 
   if (isExpanded) return <>{text}</>;
 
+  // 280 is Tweet max length.
+  const preview = createPreview(text)({ maxLength: 140 });
+
   return (
     <>
-      {createPreview(text)({ maxLength: 280 }).text}{" "}
-      <button
-        onClick={() => {
-          expandPreview(timestamp);
-        }}
-        className={styles.button}
-      >
-        Číst dále
-      </button>
+      {preview.text}
+      {preview.isTrimmed && (
+        <>
+          <> </>
+          <button
+            onClick={() => {
+              expandPreview(timestamp);
+            }}
+            className={styles.button}
+          >
+            Číst dále
+          </button>
+        </>
+      )}
     </>
   );
 };
