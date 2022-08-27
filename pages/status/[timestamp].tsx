@@ -1,7 +1,4 @@
-import { either, readonlyArray, string } from "fp-ts";
-import { Endomorphism } from "fp-ts/Endomorphism";
-import { constant, flow, pipe } from "fp-ts/function";
-import { Predicate } from "fp-ts/Predicate";
+import { string } from "fp-ts";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { ParsedUrlQuery } from "querystring";
@@ -9,6 +6,7 @@ import { useIntl } from "react-intl";
 import { UiStatusItem } from "../../components/UiStatusItem";
 import statuses from "../../data/statuses.json";
 import { createFormattedDate } from "../../lib/createFormattedDate";
+import { createPerex } from "../../lib/createPerex";
 import { createTitle } from "../../lib/createTitle";
 import { Status } from "../../types";
 
@@ -36,44 +34,17 @@ export const getStaticProps: GetStaticProps<Props, Params> = ({ params }) => ({
   },
 });
 
-type Words = readonly string[];
-
-const createTitleFromWords = (words: Words): string =>
-  createTitle(words.join(" "));
-
-const titleIsNotTooLong: Predicate<Words> = (words) =>
-  createTitleFromWords(words).length < 70;
-
-const textToWords: (s: string) => Words = flow(
-  string.trim,
-  string.split(/\s+/)
-);
-
-const createTitleWithMaxLength: Endomorphism<string> = flow(
-  textToWords,
-  readonlyArray.reduce(either.right<Words, Words>([]), (words, word) =>
-    pipe(
-      words,
-      either.map(readonlyArray.append(word)),
-      either.filterOrElseW(titleIsNotTooLong, readonlyArray.dropRight(1))
-    )
-  ),
-  either.getOrElseW(
-    readonlyArray.matchRightW(constant(readonlyArray.empty), (init, last) => [
-      ...init,
-      last + "…",
-    ])
-  ),
-  createTitleFromWords
-);
-
 const StatusDetail: NextPage<Props> = ({ status }) => {
   const intl = useIntl();
+  const title = createPerex(status.text)({
+    maxLength: 70,
+    modifier: createTitle,
+  }).text;
 
   return (
     <>
       <Head>
-        <title>{createTitleWithMaxLength(status.text)}</title>
+        <title>{title}</title>
       </Head>
       <UiStatusItem
         status={{
