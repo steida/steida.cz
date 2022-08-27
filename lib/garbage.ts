@@ -9027,6 +9027,7 @@ export const garbage = new Set(
       "r7eofu",
       "pyi3o8",
       "p30hh7",
+      "oysfoq",
     ],
   ].flat()
 );
