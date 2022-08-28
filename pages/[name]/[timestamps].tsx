@@ -53,15 +53,12 @@ export const getStaticProps: GetStaticProps<Props, Params> = ({ params }) =>
             pipe(statuses, readonlyRecord.lookup(timestamp))
         )
       ),
-    (statuses) =>
-      statuses.length === 0
-        ? { notFound: true }
-        : {
-            props: {
-              name: params?.name.slice(0, 1000) || string.empty,
-              statuses,
-            },
-          }
+    (statuses) => ({
+      props: {
+        name: params?.name.slice(0, 1000) || string.empty,
+        statuses,
+      },
+    })
   );
 
 const Statuses: NextPage<Props> = ({ name, statuses }) => {
