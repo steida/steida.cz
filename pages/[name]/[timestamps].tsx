@@ -53,12 +53,15 @@ export const getStaticProps: GetStaticProps<Props, Params> = ({ params }) =>
             pipe(statuses, readonlyRecord.lookup(timestamp))
         )
       ),
-    (statuses) => ({
-      props: {
-        name: params?.name.slice(0, 1000) || string.empty,
-        statuses,
-      },
-    })
+    (statuses) =>
+      statuses.length === 0
+        ? { notFound: true }
+        : {
+            props: {
+              name: params?.name.slice(0, 1000) || string.empty,
+              statuses,
+            },
+          }
   );
 
 const Statuses: NextPage<Props> = ({ name, statuses }) => {
@@ -76,13 +79,12 @@ const Statuses: NextPage<Props> = ({ name, statuses }) => {
     router.push("/");
   };
 
-  if (statuses == null || statuses.length === 0)
+  if (statuses == null)
     return (
       <>
         <Head>
           <title>{createTitle(name)}</title>
         </Head>
-        {statuses != null && <Text variant="h2">Stránka nenalezena.</Text>}
       </>
     );
 
