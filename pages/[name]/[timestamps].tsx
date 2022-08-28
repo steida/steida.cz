@@ -13,6 +13,7 @@ import { createFormattedDate } from "../../lib/createFormattedDate";
 import { createTitle } from "../../lib/createTitle";
 import { useAppState } from "../../lib/useAppState";
 import { Status, Statuses } from "../../types";
+import Custom404 from "../404";
 
 // export const config = {
 //   runtime: "experimental-edge",
@@ -32,7 +33,7 @@ interface Params extends ParsedUrlQuery {
 
 export const getStaticPaths: GetStaticPaths = () => ({
   paths: [],
-  fallback: "blocking",
+  fallback: true,
 });
 
 export const getStaticProps: GetStaticProps<Props, Params> = ({ params }) =>
@@ -82,6 +83,10 @@ const Statuses: NextPage<Props> = ({ name, statuses }) => {
         <title>{createTitle(name)}</title>
       </Head>
     );
+
+  // notFound: true does not work on Vercel for some reason.
+  // This is not ideal because it returns 200.
+  if (statuses.length === 0) return <Custom404 />;
 
   return (
     <>
