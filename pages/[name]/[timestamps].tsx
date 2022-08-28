@@ -32,7 +32,7 @@ interface Params extends ParsedUrlQuery {
 
 export const getStaticPaths: GetStaticPaths = () => ({
   paths: [],
-  fallback: true,
+  fallback: "blocking",
 });
 
 export const getStaticProps: GetStaticProps<Props, Params> = ({ params }) =>
