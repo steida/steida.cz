@@ -13,7 +13,6 @@ import { createFormattedDate } from "../../lib/createFormattedDate";
 import { createTitle } from "../../lib/createTitle";
 import { useAppState } from "../../lib/useAppState";
 import { Status, Statuses } from "../../types";
-import Custom404 from "../404";
 
 // export const config = {
 //   runtime: "experimental-edge",
@@ -77,16 +76,15 @@ const Statuses: NextPage<Props> = ({ name, statuses }) => {
     router.push("/");
   };
 
-  if (statuses == null)
+  if (statuses == null || statuses.length === 0)
     return (
-      <Head>
-        <title>{createTitle(name)}</title>
-      </Head>
+      <>
+        <Head>
+          <title>{createTitle(name)}</title>
+        </Head>
+        {statuses != null && <Text variant="h2">Stránka nenalezena.</Text>}
+      </>
     );
-
-  // notFound: true does not work on Vercel for some reason.
-  // This is not ideal because it returns 200.
-  if (statuses.length === 0) return <Custom404 />;
 
   return (
     <>
